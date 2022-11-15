@@ -26,7 +26,7 @@ public class DAOUsuarioRepository {
 		
 		if (objeto.isNovo()) {
 
-			String sql = "insert into model_login(login,senha,nome,email,usuario_id,perfil) values(?,?,?,?,?,?);";
+			String sql = "insert into model_login(login,senha,nome,email,usuario_id,perfil,sexo) values(?,?,?,?,?,?,?);";
 			PreparedStatement prepareSql = connection.prepareStatement(sql);
 
 			prepareSql.setString(1, objeto.getLogin());
@@ -35,6 +35,7 @@ public class DAOUsuarioRepository {
 			prepareSql.setString(4, objeto.getEmail());
 			prepareSql.setLong(5, userlogado);
 			prepareSql.setString(6, objeto.getPerfil());
+			prepareSql.setString(7, objeto.getSexo());
 
 			prepareSql.execute();
 
@@ -44,7 +45,7 @@ public class DAOUsuarioRepository {
 		
 		}else {
 			
-			String sql = "update model_login SET login=?, senha=?,nome=?,email=?,perfil=? WHERE id= "+objeto.getId()+";";
+			String sql = "update model_login SET login=?, senha=?,nome=?,email=?,perfil=?,sexo=? WHERE id= "+objeto.getId()+";";
 			PreparedStatement prepareSql = connection.prepareStatement(sql);
 			
 			prepareSql.setString(1, objeto.getLogin());
@@ -52,6 +53,7 @@ public class DAOUsuarioRepository {
 			prepareSql.setString(3, objeto.getNome());
 			prepareSql.setString(4, objeto.getEmail());
 			prepareSql.setString(5, objeto.getPerfil());
+			prepareSql.setString(6, objeto.getSexo());
 			
 			prepareSql.executeUpdate();
 			
@@ -82,6 +84,7 @@ public List<ModelLogin>consultaUsuarioList(Long userLogado) throws Exception{
 			modelLogin.setLogin(resultado.getString("login"));
 			modelLogin.setNome(resultado.getString("nome"));
 			modelLogin.setPerfil(resultado.getString("perfil"));
+			modelLogin.setSexo(resultado.getString("sexo"));
 			
 			retorno.add(modelLogin);
 			
@@ -110,6 +113,7 @@ public List<ModelLogin>consultaUsuarioList(Long userLogado) throws Exception{
 			modelLogin.setLogin(resultado.getString("login"));
 			modelLogin.setNome(resultado.getString("nome"));
 			modelLogin.setPerfil(resultado.getString("perfil"));
+			modelLogin.setSexo(resultado.getString("sexo"));
 			
 			retorno.add(modelLogin);
 			
@@ -137,6 +141,7 @@ public List<ModelLogin>consultaUsuarioList(Long userLogado) throws Exception{
 				modelLogin.setNome(resultado.getString("nome"));
 				modelLogin.setUseradmin(resultado.getBoolean("useradmin"));
 				modelLogin.setPerfil(resultado.getString("perfil"));
+				modelLogin.setSexo(resultado.getString("sexo"));
 			}
 			
 			return modelLogin;
@@ -162,6 +167,7 @@ public List<ModelLogin>consultaUsuarioList(Long userLogado) throws Exception{
 			modelLogin.setNome(resultado.getString("nome"));
 			modelLogin.setUseradmin(resultado.getBoolean("useradmin"));
 			modelLogin.setPerfil(resultado.getString("perfil"));
+			modelLogin.setSexo(resultado.getString("sexo"));
 		}
 		
 		return modelLogin;
@@ -184,6 +190,7 @@ public List<ModelLogin>consultaUsuarioList(Long userLogado) throws Exception{
 			modelLogin.setLogin(resultado.getString("login"));
 			modelLogin.setNome(resultado.getString("nome"));
 			modelLogin.setPerfil(resultado.getString("perfil"));
+			modelLogin.setSexo(resultado.getString("sexo"));
 		}
 		
 		return modelLogin;
@@ -209,6 +216,7 @@ public List<ModelLogin>consultaUsuarioList(Long userLogado) throws Exception{
 			modelLogin.setLogin(resultado.getString("login"));
 			modelLogin.setSenha(resultado.getString("senha"));
 			modelLogin.setPerfil(resultado.getString("perfil"));
+			modelLogin.setSexo(resultado.getString("sexo"));
 			
 		}
 		
