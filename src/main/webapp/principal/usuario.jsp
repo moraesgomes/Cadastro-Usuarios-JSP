@@ -351,6 +351,15 @@
 							</tbody>
 						</table>
 					</div>
+					
+			<nav arial-label="Page navigation example">
+			
+			   <ul class="pagination" id="ulPaginacaoUserAjax">
+			   
+			   
+			   </ul>
+			
+			</nav>		
 
 					<span id="totalResultados"></span>
 
@@ -418,7 +427,52 @@ function verEditar(id) {
     
 }
 
-
+function buscaUserPagAjax(url) {
+	
+	 var urlAction = document.getElementById('formUser').action;
+	 var nomeBusca = document.getElementById('nomeBusca').value;
+	
+	
+ $.ajax({
+	     
+	     method: "get",
+	     url : urlAction,
+	     data : url,
+	     success: function (response, textStatus, xhr) {
+		 
+		 var json = JSON.parse(response);
+		 
+		 
+		 $('#tabelaresultados > tbody > tr').remove();
+		 $("#ulPaginacaoUserAjax > li").remove();
+		 
+		  for(var p = 0; p < json.length; p++){
+		      $('#tabelaresultados > tbody').append('<tr> <td>'+json[p].id+'</td> <td> '+json[p].nome+'</td> <td><button onclick="verEditar('+json[p].id+')" type="button" class="btn btn-info">Ver</button></td></tr>');
+		  }
+		  
+		  document.getElementById('totalResultados').textContent = 'Resultados: ' + json.length;
+		  var totalPagina = xhr.getResponseHeader("totalPagina");
+		  
+		  for (var p=0 ; p <totalPagina ; p++){
+			  
+			 
+			  
+			  var url = 'nomeBusca=' + nomeBusca + '&acao=buscarUserAjaxPage&pagina='+ (p * 5);
+			  
+			  $("#ulPaginacaoUserAjax").append('<li class="page-item"><a class="page-link" href="#" onclick="buscaUserPagAjax(\''+url+'\')">'+ (p + 1) +'</a></li>');
+		  }
+		 
+	     }
+	     
+	 }).fail(function(xhr, status, errorThrown){
+	    alert('Erro ao buscar usuário por nome: ' + xhr.responseText);
+	 });
+	
+	
+    }
+	
+	
+	
 function buscarUsuario() {
     
     var nomeBusca = document.getElementById('nomeBusca').value;
@@ -432,18 +486,27 @@ function buscarUsuario() {
 	     method: "get",
 	     url : urlAction,
 	     data : "nomeBusca=" + nomeBusca + '&acao=buscarUserAjax',
-	     success: function (response) {
+	     success: function (response, textStatus, xhr) {
 		 
 		 var json = JSON.parse(response);
 		 
 		 
 		 $('#tabelaresultados > tbody > tr').remove();
+		 $("#ulPaginacaoUserAjax > li").remove();
 		 
 		  for(var p = 0; p < json.length; p++){
 		      $('#tabelaresultados > tbody').append('<tr> <td>'+json[p].id+'</td> <td> '+json[p].nome+'</td> <td><button onclick="verEditar('+json[p].id+')" type="button" class="btn btn-info">Ver</button></td></tr>');
 		  }
 		  
 		  document.getElementById('totalResultados').textContent = 'Resultados: ' + json.length;
+		  var totalPagina = xhr.getResponseHeader("totalPagina");
+		  
+		  for (var p=0 ; p <totalPagina ; p++){
+			  
+			  var url ='nomeBusca=' + nomeBusca + '&acao=buscarUserAjaxPage&pagina='+ (p * 5);
+			  
+			  $("#ulPaginacaoUserAjax").append('<li class="page-item"><a class="page-link" href="#" onclick="buscaUserPagAjax(\''+url+'\')">'+ (p + 1) +'</a></li>');
+		  }
 		 
 	     }
 	     
