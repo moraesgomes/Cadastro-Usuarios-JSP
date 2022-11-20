@@ -45,6 +45,7 @@
 												<!-- Basic Form Inputs card start -->
 												<div class="card">
 													<div class="card-block">
+													
 														<h4 class="sub-title">Cad. Usuário</h4>
 
 														<form class="form-material" enctype="multipart/form-data"
@@ -247,6 +248,9 @@
 															<button type="button"
 																class="btn btn-info waves-effect waves-light"
 																onclick="criarDeleteComAjax();">Excluir</button>
+															<c:if test="${modolLogin.id > 0}">
+														       <a href="<%= request.getContextPath() %>/ServletTelefone?iduser=${modolLogin.id}" class="btn btn-primary waves-effect waves-light"	>Telefone</a>
+														    </c:if>		
 															<button type="button" class="btn btn-secondary"
 																data-toggle="modal" data-target="#exampleModalUsuario">Pesquisar</button>
 														</form>

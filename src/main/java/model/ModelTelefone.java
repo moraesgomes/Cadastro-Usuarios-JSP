@@ -1,6 +1,7 @@
 package model;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 public class ModelTelefone implements Serializable {
 
@@ -34,6 +35,21 @@ public class ModelTelefone implements Serializable {
 	}
 	public void setUsuario_cad_id(ModelLogin usuario_cad_id) {
 		this.usuario_cad_id = usuario_cad_id;
+	}
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ModelTelefone other = (ModelTelefone) obj;
+		return Objects.equals(id, other.id);
 	}
     
 	

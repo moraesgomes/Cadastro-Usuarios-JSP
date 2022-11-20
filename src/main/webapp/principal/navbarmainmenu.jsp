@@ -17,7 +17,7 @@
                                   </c:if>
                                   
                                    <c:if test="${imagemUser == '' ||  imagemUser == null}">
-                                     <img class="img-80 img-radius" src="<%= request.getContextPath() %>/assets/images/avatar-4.jpg" alt="User-Profile-Image">
+                                     <img class="img-80 img-radius" src="<%= request.getContextPath() %>/assets/images/user.jpg" alt="User-Profile-Image">
                                   </c:if>
                                   
                                   <div class="user-details">
