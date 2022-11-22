@@ -48,7 +48,7 @@
 													<div class="card-block">
 														<h4 class="sub-title">Cad. Telefone</h4>
 															
-															 <form class="form-material"  action="<%= request.getContextPath() %>/SertvletTelefone" method="post" id="formFone" >
+															 <form class="form-material"  action="<%= request.getContextPath() %>/ServletTelefone" method="post" id="formFone" >
 
 															<div class="form-group form-default form-static-label">
 																<input type="text" name="id" id="id"
@@ -122,13 +122,13 @@
 
 	<jsp:include page="javascripfile.jsp"></jsp:include>
 	
+	
 <script type="text/javascript">
-
 $("#numero").keypress(function (event) {
-	   return /\d/.test(String.fromCharCode(event.keyCode)); 
-	});
+    return /\d/.test(String.fromCharCode(event.keyCode)); 
+ });
 
-
+ 
 </script>	
 </body>
 
