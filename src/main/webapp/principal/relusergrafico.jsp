@@ -69,9 +69,7 @@
 																</div>
 																
 																<div class="col-auto">
-																	<button type="button" onclick="imprimirHtml();" class="btn btn-primary mb-2">Imprimir Relatório</button>
-																	<button type="button" onclick="imprimirPdf();" class="btn btn-primary mb-2">Imprimir PDF</button>
-																	<button type="button" onclick="imprimirExcel();" class="btn btn-primary mb-2">Imprimir EXCEL</button>
+																	<button type="button" onclick="gerarGrafico();" class="btn btn-primary mb-2">Gerar Gráfico</button>
 																</div>
 															</div>
 
@@ -79,32 +77,11 @@
 														</form>
 
 														<div style="height: 300px; overflow: scroll;">
-															<table class="table" id="tabelaresultadosview">
-																<thead>
-																	<tr>
-																		<th scope="col">ID</th>
-																		<th scope="col">Nome</th>
-																	</tr>
-																</thead>
-																<tbody>
-																	<c:forEach items="${listauser}" var='ml'>
-																		<tr>
-																			<td><c:out value="${ml.id}"></c:out></td>
-																			<td><c:out value="${ml.nome}"></c:out></td>
-																		</tr>
-																		
-																		<c:forEach items="${ml.telefones}" var="fone">
-																		      
-																		      <tr>
-																		        <td/>
-																		          <td style="font-size: 10px;"><c:out value="${fone.numero}"></c:out></td>
-																		      </tr>
- 																		      
-																		</c:forEach>
-																		
-																	</c:forEach>
-																</tbody>
-															</table>
+
+															<div>
+																<canvas id="myChart"></canvas>
+															</div>
+
 														</div>
 
 
@@ -129,31 +106,59 @@
    
 <jsp:include page="javascripfile.jsp"></jsp:include>
 
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 <script type="text/javascript">
 
+function gerarGrafico() {
+    
+    
+    var urlAction = document.getElementById('formUser').action;
+    var dataInicial = document.getElementById('dataInicial').value;
+    var dataFinal = document.getElementById('dataFinal').value;
+    
+	 $.ajax({
+	     
+	     method: "get",
+	     url : urlAction,
+	     data : "dataInicial=" + dataInicial + '&dataFinal=' + dataFinal + '&acao=graficoSalario',
+	     success: function (response) {
+		 
+		    var json = JSON.parse(response);
+		    
+		    myChart.destroy();
+		
+		    myChart = new Chart(
+			    document.getElementById('myChart'),
+			    {
+				  type: 'line',
+				  data: {
+				      labels: json.perfils,
+				      datasets: [{
+				        label: 'Gráfico de média salarial por tipo',
+				        backgroundColor: 'rgb(255, 99, 132)',
+				        borderColor: 'rgb(255, 99, 132)',
+				        data: json.salarios,
+				      }]
+				    },
+				  options: {}
+				}
+			);
+		  
+	     }
+	     
+	 }).fail(function(xhr, status, errorThrown){
+	    alert('Erro ao buscar dados para o grafico ' + xhr.responseText);
+	 });
+   
+   
+   
+   
 
-
-function imprimirHtml() {
-	
-	document.getElementById("acaoRelatorioImprimirTipo").value = 'imprimirRelatorioUser';
-	$("#formUser").submit();
+   
 }
 
-function imprimirPdf() {
-	
-	document.getElementById("acaoRelatorioImprimirTipo").value = 'imprimirRelatorioPDF';
-	$("#formUser").submit();
-	return false;
-	
-}
 
-function imprimirExcel(){
-	
-	document.getElementById("acaoRelatorioImprimirTipo").value = 'imprimirRelatorioExcel';
-	$("#formUser").submit();
-	return false;
-	
-}
 
 $( function() {
 	  
