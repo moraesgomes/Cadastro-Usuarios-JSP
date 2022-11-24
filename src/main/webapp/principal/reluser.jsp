@@ -52,7 +52,7 @@
 														<form class="form-material" action="<%= request.getContextPath() %>/ServletUsuarioController"
 															method="get" id="formUser">
 															
-															<input type="hidden" name="acao" value="imprimirRelatorioUser">
+															<input type="hidden" id="acaoRelatorioImprimirTipo" name="acao" value="imprimirRelatorioUser">
 
 															<div class="form-row align-items-center">
 																<div class="col-auto">
@@ -69,7 +69,8 @@
 																</div>
 																
 																<div class="col-auto">
-																	<button type="submit" class="btn btn-primary mb-2">Imprimir Relatório</button>
+																	<button type="button" onclick="imprimirHtml();" class="btn btn-primary mb-2">Imprimir Relatório</button>
+																	<button type="button" onclick="imprimirPdf();" class="btn btn-primary mb-2">Imprimir PDF</button>
 																</div>
 															</div>
 
@@ -128,6 +129,22 @@
 <jsp:include page="javascripfile.jsp"></jsp:include>
 
 <script type="text/javascript">
+
+
+
+function imprimirHtml() {
+	
+	document.getElementById("acaoRelatorioImprimirTipo").value = 'imprimirRelatorioUser';
+	$("#formUser").submit();
+}
+
+function imprimirPdf() {
+	
+	document.getElementById("acaoRelatorioImprimirTipo").value = 'imprimirRelatorioPDF';
+	$("#formUser").submit();
+	return false;
+	
+}
 
 $( function() {
 	  
