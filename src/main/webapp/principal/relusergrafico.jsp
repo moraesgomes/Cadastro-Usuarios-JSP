@@ -1,82 +1,80 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-    
+	pageEncoding="ISO-8859-1"%>
 
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-    
-    
+ <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>   
+
 <!DOCTYPE html>
 <html lang="en">
 
 
 <jsp:include page="head.jsp"></jsp:include>
 
-  <body>
-  <!-- Pre-loader start -->
-  
-  <jsp:include page="theme-loader.jsp"></jsp:include>
-  
-  <!-- Pre-loader end -->
-  <div id="pcoded" class="pcoded">
-      <div class="pcoded-overlay-box"></div>
-      <div class="pcoded-container navbar-wrapper">
-          
-          <jsp:include page="navbar.jsp"></jsp:include>
+<body>
+	<!-- Pre-loader start -->
 
-          <div class="pcoded-main-container">
-              <div class="pcoded-wrapper">
-                  
-                  <jsp:include page="navbarmainmenu.jsp"></jsp:include>
-                  
-                  <div class="pcoded-content">
-                      <!-- Page-header start -->
-                      
-                      <jsp:include page="page-header.jsp"></jsp:include>
-                      
-                      <!-- Page-header end -->
-                        <div class="pcoded-inner-content">
-                            <!-- Main-body start -->
-                            <div class="main-body">
-                                <div class="page-wrapper">
-                                    <!-- Page-body start -->
-                                    <div class="page-body">
+	<jsp:include page="theme-loader.jsp"></jsp:include>
+
+	<!-- Pre-loader end -->
+	<div id="pcoded" class="pcoded">
+		<div class="pcoded-overlay-box"></div>
+		<div class="pcoded-container navbar-wrapper">
+
+			<jsp:include page="navbar.jsp"></jsp:include>
+
+			<div class="pcoded-main-container">
+				<div class="pcoded-wrapper">
+
+					<jsp:include page="navbarmainmenu.jsp"></jsp:include>
+
+					<div class="pcoded-content">
+						<!-- Page-header start -->
+
+						<jsp:include page="page-header.jsp"></jsp:include>
+
+						<!-- Page-header end -->
+						<div class="pcoded-inner-content">
+							<!-- Main-body start -->
+							<div class="main-body">
+								<div class="page-wrapper">
+									<!-- Page-body start -->
+									<div class="page-body">
 
 										<div class="row">
 											<div class="col-sm-12">
 												<!-- Basic Form Inputs card start -->
 												<div class="card">
 													<div class="card-block">
-
 														<h4 class="sub-title">Rel. Usuário</h4>
-														
-														<form class="form-material" action="<%= request.getContextPath() %>/ServletUsuarioController"
+
+														<form class="form-material" 
+															action="<%=request.getContextPath()%>/ServletUsuarioController"
 															method="get" id="formUser">
 															
-															<input type="hidden" id="acaoRelatorioImprimirTipo" name="acao" value="imprimirRelatorioUser">
+															<input type="hidden" id="acaoRelatorioImprimirTipo"  name="acao" value="imprimirRelatorioUser">
 
 															<div class="form-row align-items-center">
-																<div class="col-auto">
+															
+																<div class="col-sm-3 my-1">
+																	<label class="sr-only" for="dataInicial">Data Inicial</label>
+																	<input value="${dataInicial}" type="text" class="form-control" id="dataInicial" name="dataInicial">
+																</div>
 																
-																	<label class="sr-only" for="dataInicial">Data inicial</label>
-																	<input value="${dataInicial}" type="text" class="form-control mb-2" id="dataInicial" name="dataInicial" >
+																<div class="col-sm-3 my-1">
+																	<label class="sr-only" for="dataFinal">Data Final</label>
+																	
+																		<input value="${dataFinal}" type="text" class="form-control" id="dataFinal" name="dataFinal">
 																	
 																</div>
-																<div class="col-auto">
-																	<label class="sr-only" for="dataFinal">Data final</label>
-																	<div class="input-group mb-2">
-																		<input value="${dataFinal}" type="text" class="form-control" id="dataFinal" name="dataFinal" >
-																	</div>
-																</div>
-																
-																<div class="col-auto">
-																	<button type="button" onclick="gerarGrafico();" class="btn btn-primary mb-2">Gerar Gráfico</button>
+
+																<div class="col-auto my-1">
+																	<button type="button" onclick="gerarGrafico();" class="btn btn-primary">Gerar Gráfico</button>
 																</div>
 															</div>
 
-
 														</form>
-
-														<div style="height: 300px; overflow: scroll;">
+														
+														
+														<div style="height: 500px; overflow: scroll;">
 
 															<div>
 																<canvas id="myChart"></canvas>
@@ -84,39 +82,41 @@
 
 														</div>
 
-
 													</div>
 												</div>
 											</div>
 										</div>
 
-
 									</div>
-                                    <!-- Page-body end -->
-                                </div>
-                                <div id="styleSelector"> </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-   
-   
-<jsp:include page="javascripfile.jsp"></jsp:include>
+									<!-- Page-body end -->
+								</div>
+								<div id="styleSelector"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<jsp:include page="javascripfile.jsp"></jsp:include>
+	
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
+	
 <script type="text/javascript">
+
+
+var myChart = new Chart(document.getElementById('myChart'));
 
 function gerarGrafico() {
     
     
-    var urlAction = document.getElementById('formUser').action;
-    var dataInicial = document.getElementById('dataInicial').value;
-    var dataFinal = document.getElementById('dataFinal').value;
-    
+     var urlAction = document.getElementById('formUser').action;
+     var dataInicial = document.getElementById('dataInicial').value;
+     var dataFinal = document.getElementById('dataFinal').value;
+     
 	 $.ajax({
 	     
 	     method: "get",
@@ -150,12 +150,12 @@ function gerarGrafico() {
 	 }).fail(function(xhr, status, errorThrown){
 	    alert('Erro ao buscar dados para o grafico ' + xhr.responseText);
 	 });
-   
-   
-   
-   
+    
+    
+    
+    
 
-   
+    
 }
 
 
@@ -174,6 +174,8 @@ $( function() {
 		});
 } );
 
+
+
 $( function() {
 	  
 	  $("#dataFinal").datepicker({
@@ -188,8 +190,8 @@ $( function() {
 		});
 } );
 
-</script>
+
+</script>	
 </body>
 
 </html>
-    
