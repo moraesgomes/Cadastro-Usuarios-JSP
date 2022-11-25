@@ -7,8 +7,6 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Scanner;
 
-import org.apache.jasper.tagplugins.jstl.core.ForEach;
-
 import connection.SingleConnectionBanco;
 import dao.DAOVersionadorBanco;
 import jakarta.servlet.Filter;
