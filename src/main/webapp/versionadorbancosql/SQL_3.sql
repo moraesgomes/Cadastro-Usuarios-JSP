@@ -1,0 +1,1 @@
+ALTER TABLE public.model_login ADD COLUMN cpf character varying(200);
