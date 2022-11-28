@@ -8,7 +8,7 @@
 	<!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 	
-	<title>Curso JSP</title>
+	<title>Cadastramento de Usuários</title>
 	
 <style type="text/css">
 
@@ -42,7 +42,7 @@ h5{
 <body>
 
 
-<h5>Bem vindo ao curso de JSP</h5>  
+<h5>Bem vindo ao Sistema</h5>  
 
 
 
